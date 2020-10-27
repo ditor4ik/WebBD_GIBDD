@@ -1,0 +1,50 @@
+﻿@page
+@model WebBD_GIBDD.Pages.Rank.EditModel
+
+@{
+    ViewData["Title"] = "Изменить";
+}
+
+<h1>Изменить</h1>
+
+<h4>Звание</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Rank.ID" />
+            <div class="form-group">
+                <label asp-for="Rank.NameRank" class="control-label"></label>
+                <input asp-for="Rank.NameRank" class="form-control" />
+                <span asp-validation-for="Rank.NameRank" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rank.Salary" class="control-label"></label>
+                <input asp-for="Rank.Salary" class="form-control" />
+                <span asp-validation-for="Rank.Salary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rank.Duties" class="control-label"></label>
+                <textarea asp-for="Rank.Duties" class="form-control" ></textarea>
+                <span asp-validation-for="Rank.Duties" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rank.Requirements" class="control-label"></label>
+                <textarea asp-for="Rank.Requirements" class="form-control" ></textarea>
+                <span asp-validation-for="Rank.Requirements" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Вернуться к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

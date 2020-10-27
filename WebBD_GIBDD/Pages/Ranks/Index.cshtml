@@ -1,0 +1,69 @@
+﻿@page
+@model WebBD_GIBDD.Pages.Rank.IndexModel
+
+@{
+    ViewData["Title"] = "Звания";
+}
+
+<h1>Список званий</h1>
+
+<p>
+    <a asp-page="Create">Добавить новое звание</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Rank[0].NameRank)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rank[0].Salary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rank[0].Duties)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rank[0].Requirements)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Rank) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameRank)
+            </td>
+            <td>
+                @{
+                    string Salary = String.Format("{0:### ### ###}", item.Salary);
+                    @Salary
+                }
+            </td>
+            <td>
+                @{
+                    string[] arr = item.Duties.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    for (int i = 0; i < arr.Length; i++)
+                    {
+                                <li>@arr[i]</li>
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    arr = item.Requirements.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    for (int i = 0; i < arr.Length; i++)
+                    {
+                        <li>@arr[i]</li>
+                    }
+                }
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Изменить</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Подробнее</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,150 @@
+﻿@page
+@model WebBD_GIBDD.Pages.Autos.CreateModel
+
+@{
+    ViewData["Title"] = "Добавить";
+}
+
+<h1>Добавить</h1>
+
+<h4>Автомобиль</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Auto.RegNum" class="control-label"></label>
+                <input asp-for="Auto.RegNum" class="form-control" />
+                <span asp-validation-for="Auto.RegNum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.DriverID" class="control-label"></label><br />
+                <div class="btn-group dropright">
+                    <input asp-for="Auto.DriverID" class="form-control DriverInp" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                    <div class="dropdown-menu">
+                        <input type="text" id="InputDriver" onkeyup="myFunction('#InputDriver', 'DriverList')" class="form-control" placeholder="Введите водителя...">
+                        <ul id="DriverList">
+                            @foreach (var item in Model.Driver)
+                            {
+                                <li class="dropdown-item" onclick="AutoInput('@item.ID','DriverInp')"><a>@item.FullName</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <span asp-validation-for="Auto.DriverID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.BrandAutoID" class="control-label"></label><br />
+                <div class="btn-group dropright">
+                    <input asp-for="Auto.BrandAutoID" class="form-control BrandAutoInp" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                    <div class="dropdown-menu">
+                        <input type="text" id="InputBrandAuto" onkeyup="myFunction('#InputBrandAuto', 'BrandAutoList')" class="form-control" placeholder="Введите марку...">
+                        <ul id="BrandAutoList">
+                            @foreach (var item in Model.BrandAuto)
+                            {
+                                <li class="dropdown-item" onclick="AutoInput('@item.ID','BrandAutoInp')"><a>@item.Name</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <span asp-validation-for="Auto.BrandAutoID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.NumberCarBody" class="control-label"></label>
+                <input asp-for="Auto.NumberCarBody" class="form-control" />
+                <span asp-validation-for="Auto.NumberCarBody" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.EngineNumber" class="control-label"></label>
+                <input asp-for="Auto.EngineNumber" class="form-control" />
+                <span asp-validation-for="Auto.EngineNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.NumTechPass" class="control-label"></label>
+                <input asp-for="Auto.NumTechPass" class="form-control" />
+                <span asp-validation-for="Auto.NumTechPass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.DateOfIssue" class="control-label"></label>
+                <input asp-for="Auto.DateOfIssue" class="form-control" />
+                <span asp-validation-for="Auto.DateOfIssue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.DateOfRegistration" class="control-label"></label>
+                <input asp-for="Auto.DateOfRegistration" class="form-control" />
+                <span asp-validation-for="Auto.DateOfRegistration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.COLOR" class="control-label"></label>
+                <input asp-for="Auto.COLOR" type="color" value="#000000" class="form-control" />
+                <span asp-validation-for="Auto.COLOR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.TechInspection" class="control-label"></label>
+                <select asp-for="Auto.TechInspection" asp-items="Model.SelTH" class="form-control"></select>
+                <span asp-validation-for="Auto.TechInspection" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.DateTechInspection" class="control-label"></label>
+                <input asp-for="Auto.DateTechInspection" class="form-control" />
+                <span asp-validation-for="Auto.DateTechInspection" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.Description" class="control-label"></label>
+                <textarea asp-for="Auto.Description" class="form-control" ></textarea>
+                <span asp-validation-for="Auto.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.StaffID" class="control-label"></label>
+                <input asp-for="Auto.StaffID" hidden class="form-control" />
+                <br />
+                <div class="btn-group dropright">
+                    <input asp-for="Auto.StaffID" class="form-control StaffInp" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                    <div class="dropdown-menu">
+                        <input type="text" id="myInput" onkeyup="myFunction('#myInput', 'myUL')" class="form-control" placeholder="Введите сотрудника...">
+                        <ul id="myUL">
+                            @foreach (var item in Model.Staff)
+                            {
+                                <li class="dropdown-item" onclick="AutoInput('@item.ID','StaffInp')"><a>@item.FullName</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <span asp-validation-for="Auto.StaffID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-success" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Вернуться к списку</a>
+</div>
+<script>
+function myFunction(obj, list) {
+    var filter, ul, li, a, i;
+    filter = $(obj).prop("value").toUpperCase();
+    ul = document.getElementById(list);
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+
+        }
+    }
+}
+    function AutoInput(val, cl) {
+        var classj = "." + cl;
+        $(classj).val(val);
+    }
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

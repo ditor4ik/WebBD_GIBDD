@@ -1,0 +1,66 @@
+﻿@page
+@model WebBD_GIBDD.Pages.BrandAutos.IndexModel
+
+@{
+    ViewData["Title"] = "Марки автомобилей";
+}
+
+<h1>Список марок автомобилей</h1>
+
+<p>
+    <a asp-page="Create">Добавить новую марку</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandAuto[0].CompanyManufacturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandAuto[0].CountryManufacturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandAuto[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandAuto[0].StartProduction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandAuto[0].EndProduction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandAuto[0].Specifications)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.BrandAuto) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyManufacturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryManufacturer)
+            </td>
+            <td>
+                @item.StartProduction.ToLongDateString()
+            </td>
+            <td>
+                @item.EndProduction.ToLongDateString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Specifications)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Изменить</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Подробнее</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

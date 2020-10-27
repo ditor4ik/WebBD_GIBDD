@@ -1,0 +1,101 @@
+﻿@page
+@model WebBD_GIBDD.Pages.Staffs.IndexModel
+
+@{
+    ViewData["Title"] = "Сотрудники";
+}
+
+<h1>Список сотрудников</h1>
+
+<p>
+    <a asp-page="Create">Добавить сотрудника</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Staff[0].FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Staff[0].Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Staff[0].Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Staff[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Staff[0].Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Staff[0].Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Staff[0].Rank)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@for(int num = 0; num < Model.Staff.Count;num++)
+{
+    var item = Model.Staff[num];
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @{ 
+                    string Phone = String.Format("{0:# (###) ###-##-##}", item.Phone);
+                    @Phone
+                }
+               
+            </td>
+            <td>
+                @{
+                    try
+                    {
+                        <a asp-page="../Positions/Details" asp-route-id="@item.PositionID" style="color: #000; text-decoration: none;">
+                            @Model.Position.First(r => r.ID == item.PositionID).NamePosition
+                        </a>
+                    }
+                    catch
+                    {
+                        <p>нет</p>
+                    }
+                }
+                
+            </td>
+            <td>
+                @{
+                    try
+                    {
+                        <a asp-page="../Ranks/Details" asp-route-id="@item.RankID" style="color: #000; text-decoration: none;">
+                            @Model.Rank.First(r => r.ID == item.RankID).NameRank
+                        </a>
+                    }
+                    catch
+                    {
+                        <p>нет</p>
+                    }
+                }
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Изменить</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Подробнее</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

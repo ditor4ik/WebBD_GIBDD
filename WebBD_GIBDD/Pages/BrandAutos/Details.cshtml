@@ -1,0 +1,73 @@
+﻿@page
+@model WebBD_GIBDD.Pages.BrandAutos.DetailsModel
+
+@{
+    ViewData["Title"] = "Подробная ифнормация";
+}
+
+<h1>Подробная ифнормация</h1>
+
+<div>
+    <h4>Марка автомобиля</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BrandAuto.ID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BrandAuto.ID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BrandAuto.CompanyManufacturer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BrandAuto.CompanyManufacturer)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BrandAuto.CountryManufacturer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BrandAuto.CountryManufacturer)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BrandAuto.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BrandAuto.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BrandAuto.StartProduction)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.BrandAuto.StartProduction.ToLongDateString()
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BrandAuto.EndProduction)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.BrandAuto.EndProduction.ToLongDateString()
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BrandAuto.Specifications)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BrandAuto.Specifications)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BrandAuto.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                string[] arr = Model.BrandAuto.Description.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    @arr[i]<br>
+                }
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.BrandAuto.ID">Изменить</a> |
+    <a asp-page="./Index">Вернуться к списку</a>
+</div>

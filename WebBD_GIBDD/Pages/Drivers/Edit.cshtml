@@ -1,0 +1,80 @@
+﻿@page
+@model WebBD_GIBDD.Pages.Drivers.EditModel
+
+@{
+    ViewData["Title"] = "Изменить";
+}
+
+<h1>Изменить</h1>
+
+<h4>Водитель</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Driver.ID" />
+            <div class="form-group">
+                <label asp-for="Driver.FullName" class="control-label"></label>
+                <input asp-for="Driver.FullName" class="form-control" />
+                <span asp-validation-for="Driver.FullName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Driver.DateOfBirth" class="control-label"></label>
+                <input asp-for="Driver.DateOfBirth" class="form-control" />
+                <span asp-validation-for="Driver.DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Driver.Address" class="control-label"></label>
+                <textarea asp-for="Driver.Address" class="form-control"></textarea>
+                <span asp-validation-for="Driver.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Driver.PassportData" class="control-label"></label>
+                <textarea asp-for="Driver.PassportData" class="form-control"></textarea>
+                <span asp-validation-for="Driver.PassportData" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Driver.DriversLicenseNum" class="control-label"></label>
+                <input asp-for="Driver.DriversLicenseNum" class="form-control" />
+                <span asp-validation-for="Driver.DriversLicenseNum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Driver.DateIssueCertificate" class="control-label"></label>
+                <input asp-for="Driver.DateIssueCertificate" class="form-control" />
+                <span asp-validation-for="Driver.DateIssueCertificate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Driver.EndDateCertificate" class="control-label"></label>
+                <input asp-for="Driver.EndDateCertificate" class="form-control" />
+                <span asp-validation-for="Driver.EndDateCertificate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Driver.CategoryCertificate" class="control-label"></label>
+                <select asp-for="Driver.CategoryCertificate" asp-items="Model.SelCatAuto" class="form-control"></select>
+                <span asp-validation-for="Driver.CategoryCertificate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Driver.Description" class="control-label"></label>
+                <textarea asp-for="Driver.Description" class="form-control"></textarea>
+                <span asp-validation-for="Driver.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Driver.StaffID" class="control-label"></label>
+                <input asp-for="Driver.StaffID" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Вернуться к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

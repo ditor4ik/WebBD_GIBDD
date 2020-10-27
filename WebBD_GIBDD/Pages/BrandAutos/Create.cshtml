@@ -1,0 +1,64 @@
+﻿@page
+@model WebBD_GIBDD.Pages.BrandAutos.CreateModel
+
+@{
+    ViewData["Title"] = "Добавить";
+}
+
+<h1>Добавить</h1>
+
+<h4>Марку автомобиля</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BrandAuto.Name" class="control-label"></label>
+                <input asp-for="BrandAuto.Name" class="form-control" />
+                <span asp-validation-for="BrandAuto.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrandAuto.CompanyManufacturer" class="control-label"></label>
+                <input asp-for="BrandAuto.CompanyManufacturer" class="form-control" />
+                <span asp-validation-for="BrandAuto.CompanyManufacturer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrandAuto.CountryManufacturer" class="control-label"></label>
+                <input asp-for="BrandAuto.CountryManufacturer" class="form-control" />
+                <span asp-validation-for="BrandAuto.CountryManufacturer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrandAuto.StartProduction" class="control-label"></label>
+                <input asp-for="BrandAuto.StartProduction" class="form-control" />
+                <span asp-validation-for="BrandAuto.StartProduction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrandAuto.EndProduction" class="control-label"></label>
+                <input asp-for="BrandAuto.EndProduction" class="form-control" />
+                <span asp-validation-for="BrandAuto.EndProduction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrandAuto.Specifications" class="control-label"></label>
+                <select asp-for="BrandAuto.Specifications" asp-items="Model.SelCatAuto" class="form-control"></select>
+                <span asp-validation-for="BrandAuto.Specifications" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrandAuto.Description" class="control-label"></label>
+                <textarea asp-for="BrandAuto.Description" class="form-control" ></textarea>
+                <span asp-validation-for="BrandAuto.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Вернуться к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

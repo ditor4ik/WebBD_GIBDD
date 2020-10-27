@@ -1,0 +1,122 @@
+﻿@page
+@model WebBD_GIBDD.Pages.CarsStolens.DetailsModel
+
+@{
+    ViewData["Title"] = "Подробная информация";
+}
+
+<h1>Подробная информация</h1>
+
+<div>
+    <h4>Угон автомобиля</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CarsStolen.DateStolen)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.CarsStolen.DateStolen.ToLongDateString()
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CarsStolen.DateAppeal)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.CarsStolen.DateAppeal.ToLongDateString()
+        </dd>
+        <dt class="col-sm-2">
+            Регистрационный номер автомобиля
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                if(Model.Auto != null)
+                {
+                    <a asp-page="../Autos/Details" asp-route-id="@Model.Auto.ID" style="color: #000; text-decoration: none;">
+                        @Model.Auto.RegNum
+                    </a>
+                }
+                else
+                {
+                    <p>нет</p>
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CarsStolen.Driver)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                if (Model.Driver != null)
+                {
+                    <a asp-page="../Drivers/Details" asp-route-id="@Model.Driver.ID" style="color: #000; text-decoration: none;">
+                        @Model.Driver.FullName
+                    </a>
+                }
+                else
+                {
+                    <p>нет</p>
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CarsStolen.Circumstances)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                string[] arr = Model.CarsStolen.Circumstances.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    @arr[i]<br>
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CarsStolen.MarkFind)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                if (Model.CarsStolen.MarkFind)
+                {
+                    <p>Найдена</p>
+
+                }
+                else
+                {
+                    <p>Не найдена</p>
+                }
+            } 
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CarsStolen.DateFind)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                if (Model.CarsStolen.MarkFind)
+                {
+                    @Model.CarsStolen.DateFind.ToLongDateString()
+                }
+            }
+
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CarsStolen.Staff)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                if (Model.Staff != null)
+                {
+                    <a asp-page="../Staffs/Details" asp-route-id="@Model.Staff.ID" style="color: #000; text-decoration: none;">
+                        @Model.Staff.FullName
+                    </a>
+                }
+                else
+                {
+                        <p>нет</p>
+                }
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.CarsStolen.ID">Изменить</a> |
+    <a asp-page="./Index">Вернуться к списку</a>
+</div>

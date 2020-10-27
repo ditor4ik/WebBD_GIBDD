@@ -1,0 +1,83 @@
+﻿@page
+@model WebBD_GIBDD.Pages.Drivers.IndexModel
+
+@{
+    ViewData["Title"] = "Водители";
+}
+
+<h1>Список водителей</h1>
+
+<p>
+    <a asp-page="Create">Добавить водителя</a>
+</p>
+<table class="table table-hover" >
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Driver[0].FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Driver[0].DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Driver[0].DriversLicenseNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Driver[0].DateIssueCertificate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Driver[0].EndDateCertificate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Driver[0].CategoryCertificate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Driver[0].Staff)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Driver) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @item.DateOfBirth.ToLongDateString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriversLicenseNum)
+            </td>
+            <td>
+                @item.DateIssueCertificate.ToLongDateString()
+            </td>
+            <td>
+                @item.EndDateCertificate.ToLongDateString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryCertificate)
+            </td>
+            <td>
+                @{
+                    try
+                    {
+                        <a asp-page="../Staffs/Details" asp-route-id="@item.StaffID" style="color: #000; text-decoration: none;">
+                            @Model.Staff.First(r => r.ID == item.StaffID).FullName
+                        </a>
+                    }
+                    catch
+                    {
+                        <p>нет</p>
+                    }
+                }
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Изменить</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Подробнее</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

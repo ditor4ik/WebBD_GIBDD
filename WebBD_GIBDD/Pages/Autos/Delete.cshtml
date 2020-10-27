@@ -1,0 +1,164 @@
+﻿@page
+@model WebBD_GIBDD.Pages.Autos.DeleteModel
+
+@{
+    ViewData["Title"] = "Удалить";
+}
+
+<h1>Удалить</h1>
+
+<h3>Вы действительно хотите удлаить этот автомобиль?</h3>
+<div>
+    <h4>Автомобиль</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Auto.ID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Auto.ID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Auto.Driver)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                if (Model.Driver != null)
+                {
+                    <a asp-page="../Drivers/Details" asp-route-id="@Model.Driver.ID" style="color: #000; text-decoration: none;">
+                        @Html.DisplayFor(model => model.Driver.FullName)
+                    </a>
+                }
+                else
+                {
+                    <p>нет</p>
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Auto.BrandAuto)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                if (Model.BrandAuto != null)
+                {
+                    <a asp-page="../BrandAutos/Details" asp-route-id="@Model.BrandAuto.ID" style="color: #000; text-decoration: none;">
+                        @Html.DisplayFor(model => model.BrandAuto.Name)
+                    </a>
+
+                }
+                else
+                {
+                    <p>нет</p>
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Auto.RegNum)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Auto.RegNum)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Auto.NumberCarBody)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Auto.NumberCarBody)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Auto.EngineNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Auto.EngineNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Auto.NumTechPass)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Auto.NumTechPass)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Auto.DateOfIssue)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Auto.DateOfIssue.ToLongDateString()
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Auto.DateOfRegistration)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Auto.DateOfRegistration.ToLongDateString()
+        </dd>
+        <dt class="col-sm-2">
+
+            @Html.DisplayNameFor(model => model.Auto.COLOR)
+        </dt>
+        <dd class="col-sm-10">
+            <div style="
+                width: 10%;
+                height: 50px;
+                background-color: @Model.Auto.COLOR;
+                text-align: center;
+                border: 3px solid #000000;
+            ">
+                <p style="filter: invert(1);">@Model.Auto.COLOR</p>
+            </div>
+
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Auto.TechInspection)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                string[] arr = Model.Auto.TechInspection.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    @arr[i]<br>
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Auto.DateTechInspection)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Auto.DateTechInspection.ToLongDateString()
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Auto.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                arr = Model.Auto.Description.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    @arr[i]<br>
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Auto.Staff)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                if (Model.Staff != null)
+                {
+                    <a asp-page="../Staff/Details" asp-route-id="@Model.Staff.ID" style="color: #000; text-decoration: none;">
+                        @Html.DisplayFor(model => model.Staff.FullName)
+                    </a>
+
+                }
+                else
+                {
+                    <p>нет</p>
+                }
+            }
+
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Auto.ID" />
+        <input type="submit" value="Удалить" class="btn btn-danger" /> |
+        <a asp-page="./Index">Вернуться к списку</a>
+    </form>
+</div>
