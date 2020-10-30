@@ -1,0 +1,108 @@
+﻿@page
+@model WebBD_GIBDD.Pages.FilReq.Filter.FilterFindModel
+@{
+}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CarsStolen[0].DateStolen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarsStolen[0].DateAppeal)
+            </th>
+            <th>
+                Регистрационный номер автомобиля
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarsStolen[0].Driver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarsStolen[0].MarkFind)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarsStolen[0].DateFind)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarsStolen[0].Staff)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CarsStolen)
+        {
+            <tr>
+                <td>
+                    @item.DateStolen.ToLongDateString()
+                </td>
+                <td>
+                    @item.DateAppeal.ToLongDateString()
+                </td>
+                <td>
+                    @{
+                        try
+                        {
+                            <a asp-page="../Autos/Details" asp-route-id="@item.AutoID" style="color: #000; text-decoration: none;">
+                                @Model.Auto.First(r => r.ID == item.AutoID).RegNum
+                            </a>
+                        }
+                        catch
+                        {
+                            <p>нет</p>
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        try
+                        {
+                            <a asp-page="../Drivers/Details" asp-route-id="@item.DriverID" style="color: #000; text-decoration: none;">
+                                @Model.Driver.First(r => r.ID == item.DriverID).FullName
+                            </a>
+                        }
+                        catch
+                        {
+                            <p>нет</p>
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        if (item.MarkFind)
+                        {
+                            <p>найден</p>
+                        }
+                        else
+                        {
+                            <p>не найден</p>
+                        }
+                    }
+
+                </td>
+                <td>
+                    @{
+                        if (item.MarkFind)
+                        {
+                            @item.DateFind.ToLongDateString()
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        try
+                        {
+                            <a asp-page="../Staffs/Details" asp-route-id="@item.StaffID" style="color: #000; text-decoration: none;">
+                                @Model.Staff.First(r => r.ID == item.StaffID).FullName
+                            </a>
+                        }
+                        catch
+                        {
+                            <p>нет</p>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

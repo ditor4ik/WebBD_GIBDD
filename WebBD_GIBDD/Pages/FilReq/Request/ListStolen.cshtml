@@ -3,3 +3,53 @@
 @{
     ViewData["Title"] = "Список угонов";
 }
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                Дата угона
+            </th>
+            <th>
+                Регистрационный номер
+            </th>
+            <th>
+                водитель
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int num = 0; num < Model.CarsStolen.Count; num++)
+        {
+            var item = Model.CarsStolen[num];
+            <tr>
+                <td>
+                    @item.DateStolen.ToLongDateString()
+                </td>
+                <td>
+                    @{
+                        try
+                        {
+                            @Model.Auto.First(a => a.ID == item.AutoID).RegNum
+                        }
+                        catch
+                        {
+                            <p>нет</p>
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        try
+                        {
+                            @Model.Driver.First(d => d.ID == item.DriverID).FullName
+                        }
+                        catch
+                        {
+                            <p>нет</p>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

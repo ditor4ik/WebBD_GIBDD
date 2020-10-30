@@ -3,3 +3,68 @@
 @{
     ViewData["Title"] = "Список автомобилей";
 }
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                Номер автомобиля
+            </th>
+            <th>
+                Марка
+            </th>
+            <th>
+                Водитель
+            </th>
+            <th>
+                Сотрудник
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int num = 0; num < Model.Auto.Count; num++)
+        {
+            var item = Model.Auto[num];
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegNum)
+            </td>
+            <td>
+                @{
+                    try
+                    {
+                        @Model.BrandAuto.First(ba => ba.ID == item.BrandAutoID).Name
+                    }
+                    catch
+                    {
+                        <p>нет</p>
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    try
+                    {
+                        @Model.Driver.First(d => d.ID == item.DriverID).FullName
+                    }
+                    catch
+                    {
+                        <p>нет</p>
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    try
+                    {
+                        @Model.Staff.First(s => s.ID == item.StaffID).FullName
+                    }
+                    catch
+                    {
+                        <p>нет</p>
+                    }
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

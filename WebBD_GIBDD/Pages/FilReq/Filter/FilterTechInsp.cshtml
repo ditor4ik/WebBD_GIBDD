@@ -1,0 +1,111 @@
+﻿@page
+@model WebBD_GIBDD.Pages.FilReq.Filter.FilterTechInspModel
+@{
+}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Auto[0].RegNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auto[0].Driver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auto[0].BrandAuto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auto[0].NumberCarBody)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auto[0].EngineNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auto[0].NumTechPass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auto[0].DateOfIssue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auto[0].DateOfRegistration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auto[0].COLOR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auto[0].Staff)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Auto)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegNum)
+                </td>
+                <td>
+                    @{
+                        try
+                        {
+                            <a asp-page="../BrandAutos/Details" asp-route-id="@item.DriverID" style="color: #000; text-decoration: none;">
+                                @Model.Driver.First(r => r.ID == item.DriverID).FullName
+                            </a>
+                        }
+                        catch
+                        {
+                            <p>нет</p>
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        try
+                        {
+                            <a asp-page="../BrandAutos/Details" asp-route-id="@item.BrandAutoID" style="color: #000; text-decoration: none;">
+                                @Model.BrandAuto.First(r => r.ID == item.BrandAutoID).Name
+                            </a>
+                        }
+                        catch
+                        {
+                            <p>нет</p>
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberCarBody)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EngineNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumTechPass)
+                </td>
+                <td>
+                    @item.DateOfIssue.ToLongDateString()
+                </td>
+                <td>
+                    @item.DateOfRegistration.ToLongDateString()
+                </td>
+                <td>
+                    <div style="width: 50px; height: 50px; background-color: @item.COLOR; border: 3px solid #000000;"></div>
+                </td>
+                <td>
+                    @{
+                        try
+                        {
+                            <a asp-page="../Staffs/Details" asp-route-id="@item.StaffID" style="color: #000; text-decoration: none;">
+                                @Model.Staff.First(r => r.ID == item.StaffID).FullName
+                            </a>
+                        }
+                        catch
+                        {
+                            <p>нет</p>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

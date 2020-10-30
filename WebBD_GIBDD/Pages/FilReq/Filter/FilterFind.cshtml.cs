@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebBD_GIBDD.Pages.FilReq.Request
+namespace WebBD_GIBDD.Pages.FilReq.Filter
 {
-    public class ListStolenModel : PageModel
+    public class FilterFindModel : PageModel
     {
         private readonly WebBD_GIBDD.Data.WebBD_GIBDDContext _context;
 
-        public ListStolenModel(WebBD_GIBDD.Data.WebBD_GIBDDContext context)
+        public FilterFindModel(WebBD_GIBDD.Data.WebBD_GIBDDContext context)
         {
             _context = context;
         }
@@ -21,11 +21,25 @@ namespace WebBD_GIBDD.Pages.FilReq.Request
         public IList<CarsStolen> CarsStolen { get; set; }
         public IList<Auto> Auto { get; set; }
         public IList<Driver> Driver { get; set; }
-        public async Task OnGetAsync()
+        public IList<Staff> Staff { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int? find)
         {
+            if(find == null)
+            {
+                return NotFound();
+            }
+
+            bool Find;
+            if (find == 1) Find = true;
+            else Find = false;
+
+            CarsStolen = await _context.CarsStolen.Where(m => m.MarkFind == Find).ToListAsync();
             Auto = await _context.Auto.ToListAsync();
-            CarsStolen = await _context.CarsStolen.ToListAsync();
             Driver = await _context.Driver.ToListAsync();
+            Staff = await _context.Staff.ToListAsync();
+
+            return Page();
         }
     }
 }

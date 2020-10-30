@@ -18,6 +18,10 @@ namespace WebBD_GIBDD.Pages.FilReq
             _context = context;
         }
         public List<SelectListItem> SelPosition { get; set; }
+        public List<SelectListItem> SelRank { get; set; }
+        public List<SelectListItem> SelDriver { get; set; }
+        public List<SelectListItem> SelTechInsp { get; set; }
+        public List<SelectListItem> SelFind { get; set; }
         public IActionResult OnGet()
         {
             SelPosition = _context.Position.Select(p =>
@@ -26,7 +30,28 @@ namespace WebBD_GIBDD.Pages.FilReq
                                       Value = p.ID.ToString(),
                                       Text = p.NamePosition
                                   }).ToList();
-
+            SelRank = _context.Rank.Select(r =>
+                                  new SelectListItem
+                                  {
+                                      Value = r.ID.ToString(),
+                                      Text = r.NameRank
+                                  }).ToList();
+            SelDriver = _context.Driver.Select(d =>
+                                  new SelectListItem
+                                  {
+                                      Value = d.ID.ToString(),
+                                      Text = d.FullName
+                                  }).ToList();
+            SelTechInsp = new List<SelectListItem>
+                        {
+                           new SelectListItem{ Value = "1", Text = "Прошел"},
+                           new SelectListItem{ Value = "0", Text = "Не прошел"}
+                        };
+            SelFind = new List<SelectListItem>
+                        {
+                           new SelectListItem{ Value = "1", Text = "Найден"},
+                           new SelectListItem{ Value = "0", Text = "Не найден"}
+                        };
             return Page();
         }
     }

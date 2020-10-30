@@ -12,7 +12,6 @@
         }
         else {
             $(name).prop('disabled', true);
-
         }
     }
 </script>
@@ -46,12 +45,43 @@
             <div class="card-body">
                 <form>
                     Отобразить сотрудников с должностью:
-                    <select asp-items="Model.SelPosition" name="id" class="form-control-sm" onchange="BtnFun('FilPos', this)">
+                    <select asp-items="Model.SelPosition" name="id" class="form-control-sm" onclick="BtnFun('FilPos', this)">
                         <option value="-1">не выбран</option>
                     </select>
-                    <button asp-page="Filter/FilterPosition" asp-route-id="1" class="btn btn-primary FilPos" disabled>Отфильтровать</button>
+                    <button asp-page="Filter/FilterPosition" class="btn btn-primary FilPos" disabled>Отфильтровать</button>
                 </form>
-
+                <br />
+                <form>
+                    Отобразить сотрудников со званием:
+                    <select asp-items="Model.SelRank" name="id" class="form-control-sm" onclick="BtnFun('FilRank', this)">
+                        <option value="-1">не выбран</option>
+                    </select>
+                    <button asp-page="Filter/FilterRank" class="btn btn-primary FilRank" disabled>Отфильтровать</button>
+                </form>
+                <br />
+                <form>
+                    Отобразить автомобили владельца:
+                    <select asp-items="Model.SelDriver" name="id" class="form-control-sm" onclick="BtnFun('FilDriver', this)">
+                        <option value="-1">не выбран</option>
+                    </select>
+                    <button asp-page="Filter/FilterDriver" class="btn btn-primary FilDriver" disabled>Отфильтровать</button>
+                </form>
+                <br />
+                <form>
+                    Отобразить автомобили с тех. осмотром:
+                    <select asp-items="Model.SelTechInsp" name="ti" class="form-control-sm" onclick="BtnFun('FilTech', this)">
+                        <option value="-1">не выбран</option>
+                    </select>
+                    <button asp-page="Filter/FilterTechInsp" class="btn btn-primary FilTech" disabled>Отфильтровать</button>
+                </form>
+                <br />
+                <form>
+                    Отобразить найденные или ненайденные автомобили:
+                    <select asp-items="Model.SelFind" name="find" class="form-control-sm" onclick="BtnFun('FilFind', this)">
+                        <option value="-1">не выбран</option>
+                    </select>
+                    <button asp-page="Filter/FilterFind" class="btn btn-primary FilFind" disabled>Отфильтровать</button>
+                </form>
             </div>
         </div>
     </div>
