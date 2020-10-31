@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebBD_GIBDD.Data;
 
 namespace WebBD_GIBDD.Migrations
 {
     [DbContext(typeof(WebBD_GIBDDContext))]
-    partial class WebBD_GIBDDContextModelSnapshot : ModelSnapshot
+    [Migration("20201031082350_Init31.10")]
+    partial class Init3110
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

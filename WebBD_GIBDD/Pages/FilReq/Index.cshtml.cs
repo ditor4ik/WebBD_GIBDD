@@ -49,8 +49,8 @@ namespace WebBD_GIBDD.Pages.FilReq
                         };
             SelFind = new List<SelectListItem>
                         {
-                           new SelectListItem{ Value = "1", Text = "Найден"},
-                           new SelectListItem{ Value = "0", Text = "Не найден"}
+                           new SelectListItem{ Value = "True", Text = "Найден"},
+                           new SelectListItem{ Value = "False", Text = "Не найден"}
                         };
             return Page();
         }

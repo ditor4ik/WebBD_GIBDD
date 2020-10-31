@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace BD_GIBDD.Models
 {
@@ -18,5 +19,6 @@ namespace BD_GIBDD.Models
         public string Duties { get; set; }
         [Display(Name = "Требования")]
         public string Requirements { get; set; }
+        public DbSet<Staff> Staff { get; set; }
     }
 }

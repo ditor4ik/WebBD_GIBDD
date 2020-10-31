@@ -25,10 +25,10 @@ namespace BD_GIBDD.Models
         public string PassportData { get; set; }
         public long? PositionID { get; set; }
         [Display(Name = "Должность")]
-        public DbSet<Position> Position { get; set; }
+        public Position Position { get; set; }
         public long? RankID { get; set; }
         [Display(Name = "Звание")]
-        public DbSet<Rank> Rank { get; set; }
+        public Rank Rank { get; set; }
 
     }
 }
