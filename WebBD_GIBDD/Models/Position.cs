@@ -19,6 +19,6 @@ namespace BD_GIBDD.Models
         public string Duties { get; set; }
         [Display(Name = "Требования")]
         public string Requirements { get; set; }
-        public DbSet<Staff> Staff { get; set; }
+        public List<Staff> Staff { get; set; }
     }
 }
