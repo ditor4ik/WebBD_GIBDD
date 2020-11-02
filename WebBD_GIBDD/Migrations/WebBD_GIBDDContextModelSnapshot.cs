@@ -32,9 +32,6 @@ namespace WebBD_GIBDD.Migrations
                     b.Property<string>("COLOR")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("CarsStolenID")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("DateOfIssue")
                         .HasColumnType("datetime2");
 
@@ -70,7 +67,11 @@ namespace WebBD_GIBDD.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CarsStolenID");
+                    b.HasIndex("BrandAutoID");
+
+                    b.HasIndex("DriverID");
+
+                    b.HasIndex("StaffID");
 
                     b.ToTable("Auto");
                 });
@@ -81,9 +82,6 @@ namespace WebBD_GIBDD.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("AutoID")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("CompanyManufacturer")
                         .HasColumnType("nvarchar(max)");
@@ -107,8 +105,6 @@ namespace WebBD_GIBDD.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("AutoID");
 
                     b.ToTable("BrandAuto");
                 });
@@ -146,6 +142,12 @@ namespace WebBD_GIBDD.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("AutoID");
+
+                    b.HasIndex("DriverID");
+
+                    b.HasIndex("StaffID");
+
                     b.ToTable("CarsStolen");
                 });
 
@@ -158,12 +160,6 @@ namespace WebBD_GIBDD.Migrations
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("AutoID")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("CarsStolenID")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("CategoryCertificate")
                         .HasColumnType("nvarchar(max)");
@@ -194,9 +190,7 @@ namespace WebBD_GIBDD.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AutoID");
-
-                    b.HasIndex("CarsStolenID");
+                    b.HasIndex("StaffID");
 
                     b.ToTable("Driver");
                 });
@@ -262,15 +256,6 @@ namespace WebBD_GIBDD.Migrations
                     b.Property<short>("Age")
                         .HasColumnType("smallint");
 
-                    b.Property<long?>("AutoID")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("CarsStolenID")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("DriverID")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
@@ -291,12 +276,6 @@ namespace WebBD_GIBDD.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AutoID");
-
-                    b.HasIndex("CarsStolenID");
-
-                    b.HasIndex("DriverID");
-
                     b.HasIndex("PositionID");
 
                     b.HasIndex("RankID");
@@ -306,43 +285,45 @@ namespace WebBD_GIBDD.Migrations
 
             modelBuilder.Entity("BD_GIBDD.Models.Auto", b =>
                 {
-                    b.HasOne("BD_GIBDD.Models.CarsStolen", null)
+                    b.HasOne("BD_GIBDD.Models.BrandAuto", "BrandAuto")
                         .WithMany("Auto")
-                        .HasForeignKey("CarsStolenID");
+                        .HasForeignKey("BrandAutoID");
+
+                    b.HasOne("BD_GIBDD.Models.Driver", "Driver")
+                        .WithMany("Auto")
+                        .HasForeignKey("DriverID");
+
+                    b.HasOne("BD_GIBDD.Models.Staff", "Staff")
+                        .WithMany("Auto")
+                        .HasForeignKey("StaffID");
                 });
 
-            modelBuilder.Entity("BD_GIBDD.Models.BrandAuto", b =>
+            modelBuilder.Entity("BD_GIBDD.Models.CarsStolen", b =>
                 {
-                    b.HasOne("BD_GIBDD.Models.Auto", null)
-                        .WithMany("BrandAuto")
+                    b.HasOne("BD_GIBDD.Models.Auto", "Auto")
+                        .WithMany()
                         .HasForeignKey("AutoID");
+
+                    b.HasOne("BD_GIBDD.Models.Driver", "Driver")
+                        .WithMany()
+                        .HasForeignKey("DriverID");
+
+                    b.HasOne("BD_GIBDD.Models.Staff", "Staff")
+                        .WithMany("CarsStolen")
+                        .HasForeignKey("StaffID");
                 });
 
             modelBuilder.Entity("BD_GIBDD.Models.Driver", b =>
                 {
-                    b.HasOne("BD_GIBDD.Models.Auto", null)
+                    b.HasOne("BD_GIBDD.Models.Staff", "Staff")
                         .WithMany("Driver")
-                        .HasForeignKey("AutoID");
-
-                    b.HasOne("BD_GIBDD.Models.CarsStolen", null)
-                        .WithMany("Driver")
-                        .HasForeignKey("CarsStolenID");
+                        .HasForeignKey("StaffID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BD_GIBDD.Models.Staff", b =>
                 {
-                    b.HasOne("BD_GIBDD.Models.Auto", null)
-                        .WithMany("Staff")
-                        .HasForeignKey("AutoID");
-
-                    b.HasOne("BD_GIBDD.Models.CarsStolen", null)
-                        .WithMany("Staff")
-                        .HasForeignKey("CarsStolenID");
-
-                    b.HasOne("BD_GIBDD.Models.Driver", null)
-                        .WithMany("Staff")
-                        .HasForeignKey("DriverID");
-
                     b.HasOne("BD_GIBDD.Models.Position", "Position")
                         .WithMany("Staff")
                         .HasForeignKey("PositionID");

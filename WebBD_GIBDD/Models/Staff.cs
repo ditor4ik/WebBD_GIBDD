@@ -29,6 +29,9 @@ namespace BD_GIBDD.Models
         public long? RankID { get; set; }
         [Display(Name = "Звание")]
         public Rank Rank { get; set; }
+        public IList<Auto> Auto { get; set; }
+        public IList<Driver> Driver { get; set; }
+        public IList<CarsStolen> CarsStolen { get; set; }
 
     }
 }

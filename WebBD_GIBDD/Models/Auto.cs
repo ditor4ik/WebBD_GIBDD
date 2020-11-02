@@ -47,19 +47,19 @@ namespace BD_GIBDD.Models
         public long? BrandAutoID { get; set; }
 
         [Display(Name = "Марка машины")]
-        public DbSet<BrandAuto> BrandAuto { get; set; }
+        public BrandAuto BrandAuto { get; set; }
 
         [Display(Name = "Код сотрудника")]
         public long? StaffID { get; set; }
 
         [Display(Name = "Сотрудник")]
-        public DbSet<Staff> Staff { get; set; }
+        public Staff Staff { get; set; }
 
         [Display(Name = "Код водителя")]
         public long? DriverID { get; set; }
 
         [Display(Name = "Водитель")]
-        public DbSet<Driver> Driver { get; set; }
+        public Driver Driver { get; set; }
 
     }
 }

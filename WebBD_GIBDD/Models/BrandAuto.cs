@@ -24,6 +24,6 @@ namespace BD_GIBDD.Models
         public string Specifications { get; set; }
         [Display(Name = "Описание")]
         public string Description { get; set; }
-
+        public List<Auto> Auto { get; set; }
     }
 }

@@ -19,6 +19,10 @@ namespace WebBD_GIBDD.Pages.Autos
         {
             _context = context;
         }
+        public List<SelectListItem> SelTH { get; set; }
+        public List<Driver> Driver { get; set; }
+        public List<Staff> Staff { get; set; }
+        public List<BrandAuto> BrandAuto { get; set; }
 
         [BindProperty]
         public Auto Auto { get; set; }
@@ -36,6 +40,14 @@ namespace WebBD_GIBDD.Pages.Autos
             {
                 return NotFound();
             }
+            SelTH = new List<SelectListItem>
+                        {
+                           new SelectListItem{ Value = "Прошел", Text = "Прошел"},
+                           new SelectListItem{ Value = "Не прошел", Text = "Не прошел"}
+                        };
+            Staff = await _context.Staff.ToListAsync();
+            Driver = await _context.Driver.ToListAsync();
+            BrandAuto = await _context.BrandAuto.ToListAsync();
             return Page();
         }
 
@@ -74,4 +86,5 @@ namespace WebBD_GIBDD.Pages.Autos
             return _context.Auto.Any(e => e.ID == id);
         }
     }
+
 }

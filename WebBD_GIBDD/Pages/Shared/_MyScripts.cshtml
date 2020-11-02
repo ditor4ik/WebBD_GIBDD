@@ -1,0 +1,22 @@
+﻿<script>
+    function myFunction(obj, list) {
+        var filter, ul, li, a, i;
+        filter = $(obj).prop("value").toUpperCase();
+        ul = document.getElementById(list);
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i];
+            if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+
+            }
+        }
+    }
+    function AutoInput(val, cl, lol) {
+        var classj = "." + cl;
+        $("input" + classj).val(val);
+        $("p" + classj).html("выбран - " + lol);
+    }
+</script>

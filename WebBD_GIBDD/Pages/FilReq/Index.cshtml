@@ -7,7 +7,7 @@
     function BtnFun(ClassName, obj) {
         var value = obj.value;
         var name = "." + ClassName;
-        if (value >= 0) {
+        if (value[0] != "-") {
             $(name).prop('disabled', false);
         }
         else {

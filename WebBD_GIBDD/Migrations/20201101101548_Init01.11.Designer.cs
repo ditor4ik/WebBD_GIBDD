@@ -10,8 +10,8 @@ using WebBD_GIBDD.Data;
 namespace WebBD_GIBDD.Migrations
 {
     [DbContext(typeof(WebBD_GIBDDContext))]
-    [Migration("20201011201304_InitialCrea")]
-    partial class InitialCrea
+    [Migration("20201101101548_Init01.11")]
+    partial class Init0111
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,19 +28,16 @@ namespace WebBD_GIBDD.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<long?>("BrandAutoID")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("COLOR")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("CarsStolenID")
-                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("DateOfIssue")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfRegistration")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateSheetNumber")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateTechInspection")
@@ -49,21 +46,34 @@ namespace WebBD_GIBDD.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EngineNumber")
-                        .HasColumnType("int");
+                    b.Property<long?>("DriverID")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("EngineNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NumTechPass")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NumberCarBody")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RegNum")
-                        .HasColumnType("int");
+                    b.Property<string>("RegNum")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("StaffID")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("TechInspection")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CarsStolenID");
+                    b.HasIndex("BrandAutoID");
+
+                    b.HasIndex("DriverID");
+
+                    b.HasIndex("StaffID");
 
                     b.ToTable("Auto");
                 });
@@ -74,9 +84,6 @@ namespace WebBD_GIBDD.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("AutoID")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("CompanyManufacturer")
                         .HasColumnType("nvarchar(max)");
@@ -101,8 +108,6 @@ namespace WebBD_GIBDD.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AutoID");
-
                     b.ToTable("BrandAuto");
                 });
 
@@ -112,6 +117,9 @@ namespace WebBD_GIBDD.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long?>("AutoID")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Circumstances")
                         .HasColumnType("nvarchar(max)");
@@ -125,10 +133,22 @@ namespace WebBD_GIBDD.Migrations
                     b.Property<DateTime>("DateStolen")
                         .HasColumnType("datetime2");
 
+                    b.Property<long?>("DriverID")
+                        .HasColumnType("bigint");
+
                     b.Property<bool>("MarkFind")
                         .HasColumnType("bit");
 
+                    b.Property<long?>("StaffID")
+                        .HasColumnType("bigint");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("AutoID");
+
+                    b.HasIndex("DriverID");
+
+                    b.HasIndex("StaffID");
 
                     b.ToTable("CarsStolen");
                 });
@@ -143,15 +163,8 @@ namespace WebBD_GIBDD.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("AutoID")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("CarsStolenID")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("CategoryCertificate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateIssueCertificate")
                         .HasColumnType("datetime2");
@@ -162,8 +175,8 @@ namespace WebBD_GIBDD.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DriversLicenseNum")
-                        .HasColumnType("int");
+                    b.Property<long>("DriversLicenseNum")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("EndDateCertificate")
                         .HasColumnType("datetime2");
@@ -174,11 +187,12 @@ namespace WebBD_GIBDD.Migrations
                     b.Property<string>("PassportData")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long>("StaffID")
+                        .HasColumnType("bigint");
+
                     b.HasKey("ID");
 
-                    b.HasIndex("AutoID");
-
-                    b.HasIndex("CarsStolenID");
+                    b.HasIndex("StaffID");
 
                     b.ToTable("Driver");
                 });
@@ -202,12 +216,7 @@ namespace WebBD_GIBDD.Migrations
                     b.Property<int>("Salary")
                         .HasColumnType("int");
 
-                    b.Property<long?>("StaffID")
-                        .HasColumnType("bigint");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("StaffID");
 
                     b.ToTable("Position");
                 });
@@ -231,12 +240,7 @@ namespace WebBD_GIBDD.Migrations
                     b.Property<int>("Salary")
                         .HasColumnType("int");
 
-                    b.Property<long?>("StaffID")
-                        .HasColumnType("bigint");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("StaffID");
 
                     b.ToTable("Rank");
                 });
@@ -253,15 +257,6 @@ namespace WebBD_GIBDD.Migrations
 
                     b.Property<short>("Age")
                         .HasColumnType("smallint");
-
-                    b.Property<long?>("AutoID")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("CarsStolenID")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("DriverID")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
@@ -283,67 +278,61 @@ namespace WebBD_GIBDD.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AutoID");
+                    b.HasIndex("PositionID");
 
-                    b.HasIndex("CarsStolenID");
-
-                    b.HasIndex("DriverID");
+                    b.HasIndex("RankID");
 
                     b.ToTable("Staff");
                 });
 
             modelBuilder.Entity("BD_GIBDD.Models.Auto", b =>
                 {
-                    b.HasOne("BD_GIBDD.Models.CarsStolen", null)
-                        .WithMany("AutoID")
-                        .HasForeignKey("CarsStolenID");
+                    b.HasOne("BD_GIBDD.Models.BrandAuto", "BrandAuto")
+                        .WithMany("Auto")
+                        .HasForeignKey("BrandAutoID");
+
+                    b.HasOne("BD_GIBDD.Models.Driver", "Driver")
+                        .WithMany("Auto")
+                        .HasForeignKey("DriverID");
+
+                    b.HasOne("BD_GIBDD.Models.Staff", "Staff")
+                        .WithMany("Auto")
+                        .HasForeignKey("StaffID");
                 });
 
-            modelBuilder.Entity("BD_GIBDD.Models.BrandAuto", b =>
+            modelBuilder.Entity("BD_GIBDD.Models.CarsStolen", b =>
                 {
-                    b.HasOne("BD_GIBDD.Models.Auto", null)
-                        .WithMany("BrandAutoID")
+                    b.HasOne("BD_GIBDD.Models.Auto", "Auto")
+                        .WithMany()
                         .HasForeignKey("AutoID");
+
+                    b.HasOne("BD_GIBDD.Models.Driver", "Driver")
+                        .WithMany()
+                        .HasForeignKey("DriverID");
+
+                    b.HasOne("BD_GIBDD.Models.Staff", "Staff")
+                        .WithMany("CarsStolen")
+                        .HasForeignKey("StaffID");
                 });
 
             modelBuilder.Entity("BD_GIBDD.Models.Driver", b =>
                 {
-                    b.HasOne("BD_GIBDD.Models.Auto", null)
-                        .WithMany("DriverID")
-                        .HasForeignKey("AutoID");
-
-                    b.HasOne("BD_GIBDD.Models.CarsStolen", null)
-                        .WithMany("DriverID")
-                        .HasForeignKey("CarsStolenID");
-                });
-
-            modelBuilder.Entity("BD_GIBDD.Models.Position", b =>
-                {
-                    b.HasOne("BD_GIBDD.Models.Staff", null)
-                        .WithMany("Position")
-                        .HasForeignKey("StaffID");
-                });
-
-            modelBuilder.Entity("BD_GIBDD.Models.Rank", b =>
-                {
-                    b.HasOne("BD_GIBDD.Models.Staff", null)
-                        .WithMany("Rank")
-                        .HasForeignKey("StaffID");
+                    b.HasOne("BD_GIBDD.Models.Staff", "Staff")
+                        .WithMany("Driver")
+                        .HasForeignKey("StaffID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BD_GIBDD.Models.Staff", b =>
                 {
-                    b.HasOne("BD_GIBDD.Models.Auto", null)
-                        .WithMany("StaffID")
-                        .HasForeignKey("AutoID");
+                    b.HasOne("BD_GIBDD.Models.Position", "Position")
+                        .WithMany("Staff")
+                        .HasForeignKey("PositionID");
 
-                    b.HasOne("BD_GIBDD.Models.CarsStolen", null)
-                        .WithMany("StaffID")
-                        .HasForeignKey("CarsStolenID");
-
-                    b.HasOne("BD_GIBDD.Models.Driver", null)
-                        .WithMany("StaffID")
-                        .HasForeignKey("DriverID");
+                    b.HasOne("BD_GIBDD.Models.Rank", "Rank")
+                        .WithMany("Staff")
+                        .HasForeignKey("RankID");
                 });
 #pragma warning restore 612, 618
         }

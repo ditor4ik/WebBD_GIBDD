@@ -33,7 +33,8 @@ namespace BD_GIBDD.Models
         [Display(Name = "Код сотрудника")]
         public long StaffID { get; set; }
         [Display(Name = "Сотрудник")]
-        public DbSet<Staff> Staff { get; set; }
+        public Staff Staff { get; set; }
+        public IList<Auto> Auto { get; set; }
 
 
     }

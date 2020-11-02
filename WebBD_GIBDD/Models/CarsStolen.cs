@@ -21,15 +21,15 @@ namespace BD_GIBDD.Models
         [Display(Name = "Дата нахождения")]
         public DateTime DateFind { get; set; }
         [Display(Name = "Сотрудник")]
-        public DbSet<Staff> Staff { get; set; }
+        public Staff Staff { get; set; }
         [Display(Name = "Код сотрудника")]
         public long? StaffID { get; set; }
         [Display(Name = "Автомобиль")]
-        public DbSet<Auto> Auto { get; set; }
+        public Auto Auto { get; set; }
         [Display(Name = "Код автомобиля")]
         public long? AutoID { get; set; }
         [Display(Name = "Водитель")]
-        public DbSet<Driver> Driver { get; set; }
+        public Driver Driver { get; set; }
         [Display(Name = "Код водителя")]
         public long? DriverID { get; set; }
 
