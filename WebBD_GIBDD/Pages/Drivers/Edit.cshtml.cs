@@ -23,7 +23,7 @@ namespace WebBD_GIBDD.Pages.Drivers
         [BindProperty]
         public Driver Driver { get; set; }
         public List<SelectListItem> SelCatAuto { get; set; }
-        public List<SelectListItem> SelStaff { get; set; }
+        public IList<Staff> Staff { get; set; }
         public async Task<IActionResult> OnGetAsync(long? id)
         {
             if (id == null)
@@ -60,12 +60,8 @@ namespace WebBD_GIBDD.Pages.Drivers
                 new SelectListItem{ Value = "Tb", Text = "Tb", Group = group3},
                 new SelectListItem{ Value = "Tm", Text = "Tm", Group = group3}
             };
-            SelStaff = _context.Staff.Select(r =>
-                                  new SelectListItem
-                                  {
-                                      Value = r.ID.ToString(),
-                                      Text = r.FullName
-                                  }).ToList();
+
+            Staff = await _context.Staff.ToListAsync();
             return Page();
         }
 

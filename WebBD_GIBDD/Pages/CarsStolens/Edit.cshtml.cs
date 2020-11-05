@@ -22,7 +22,9 @@ namespace WebBD_GIBDD.Pages.CarsStolens
 
         [BindProperty]
         public CarsStolen CarsStolen { get; set; }
-
+        public IList<Staff> Staff { get; set; }
+        public IList<Driver> Driver { get; set; }
+        public IList<Auto> Auto { get; set; }
         public async Task<IActionResult> OnGetAsync(long? id)
         {
             if (id == null)
@@ -36,6 +38,9 @@ namespace WebBD_GIBDD.Pages.CarsStolens
             {
                 return NotFound();
             }
+            Staff = await _context.Staff.ToListAsync();
+            Driver = await _context.Driver.ToListAsync();
+            Auto = await _context.Auto.ToListAsync();
             return Page();
         }
 

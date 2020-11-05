@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BD_GIBDD.Models;
 using WebBD_GIBDD.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebBD_GIBDD.Pages.CarsStolens
 {
@@ -18,9 +19,14 @@ namespace WebBD_GIBDD.Pages.CarsStolens
         {
             _context = context;
         }
-
-        public IActionResult OnGet()
+        public IList<Staff> Staff { get; set; }
+        public IList<Driver> Driver { get; set; }
+        public IList<Auto> Auto { get; set; }
+        public async Task<IActionResult> OnGetAsync()
         {
+            Staff = await _context.Staff.ToListAsync();
+            Driver = await _context.Driver.ToListAsync();
+            Auto = await _context.Auto.ToListAsync();
             return Page();
         }
 

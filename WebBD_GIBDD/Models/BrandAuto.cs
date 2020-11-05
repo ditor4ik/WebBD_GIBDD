@@ -20,8 +20,10 @@ namespace BD_GIBDD.Models
         public DateTime StartProduction { get; set; }
         [Display(Name = "Дата окончания производства")]
         public DateTime EndProduction { get; set; }
-        [Display(Name = "Категория")]
+        [Display(Name = "Характеристики")]
         public string Specifications { get; set; }
+        [Display(Name = "Категория")]
+        public string Category { get; set; }
         [Display(Name = "Описание")]
         public string Description { get; set; }
         public List<Auto> Auto { get; set; }

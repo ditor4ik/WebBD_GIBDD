@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BD_GIBDD.Models;
 using WebBD_GIBDD.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebBD_GIBDD.Pages.Drivers
 {
@@ -18,10 +19,9 @@ namespace WebBD_GIBDD.Pages.Drivers
         {
             _context = context;
         }
-        public List<SelectListItem> SelStaff { get; set; }
         public List<SelectListItem> SelCatAuto { get; set; }
-        
-        public IActionResult OnGet()
+        public IList<Staff> Staff { get; set; }
+        public async Task<IActionResult> OnGetAsync()
         {
             var group1 = new SelectListGroup() { Name = "Легковой автомототранспорт" };
             var group2 = new SelectListGroup() { Name = "Грузовые автомобили" };
@@ -46,12 +46,7 @@ namespace WebBD_GIBDD.Pages.Drivers
                 new SelectListItem{ Value = "Tb", Text = "Tb", Group = group3},
                 new SelectListItem{ Value = "Tm", Text = "Tm", Group = group3}
             };
-            SelStaff = _context.Staff.Select(r =>
-                                  new SelectListItem
-                                  {
-                                      Value = r.ID.ToString(),
-                                      Text = r.FullName
-                                  }).ToList();
+            Staff = await _context.Staff.ToListAsync();
             return Page();
         }
 

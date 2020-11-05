@@ -20,8 +20,9 @@ namespace WebBD_GIBDD.Pages.Autos
             _context = context;
         }
         public List<SelectListItem> SelTH { get; set; }
-        public List<Driver> Driver { get; set; }
+
         public IList<Staff> Staff { get; set; }
+        public IList<Driver> Driver { get; set; }
         public IList<BrandAuto> BrandAuto { get; set; }
         public async Task<IActionResult> OnGetAsync()
         {
@@ -33,6 +34,7 @@ namespace WebBD_GIBDD.Pages.Autos
             Staff = await _context.Staff.ToListAsync();
             Driver = await _context.Driver.ToListAsync();
             BrandAuto = await _context.BrandAuto.ToListAsync();
+
             return Page();
         }
 

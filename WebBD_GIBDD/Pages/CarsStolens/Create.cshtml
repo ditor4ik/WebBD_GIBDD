@@ -24,13 +24,47 @@
                 <span asp-validation-for="CarsStolen.DateAppeal" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CarsStolen.AutoID" class="control-label"></label>
-                <input asp-for="CarsStolen.AutoID" class="form-control" />
+                <label asp-for="CarsStolen.Auto" class="control-label"></label><br/>
+                <input asp-for="CarsStolen.AutoID" hidden class="form-control AutoInp" />
+                <div class="btn-group dropright">
+                    <button class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Выбрать
+                    </button>
+                    <div class="dropdown-menu">
+                        <input type="text" id="InputAuto" onkeyup="myFunction('#InputAuto', 'AutoList')" class="form-control" placeholder="Введите номер автомобиля...">
+                        <ul id="AutoList">
+                            @foreach (var item in Model.Auto)
+                            {
+                                <li class="dropdown-item" onclick="AutoInput('@item.ID','AutoInp','@Html.DisplayFor(modelitem => item.RegNum)')">
+                                    @item.RegNum
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <p class="AutoInp"></p>
                 <span asp-validation-for="CarsStolen.AutoID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CarsStolen.DriverID" class="control-label"></label>
-                <input asp-for="CarsStolen.DriverID" class="form-control" />
+                <label asp-for="CarsStolen.Driver" class="control-label"></label><br />
+                <input asp-for="CarsStolen.DriverID" hidden class="form-control DriverInp" />
+                <div class="btn-group dropright">
+                    <button class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Выбрать
+                    </button>
+                    <div class="dropdown-menu">
+                        <input type="text" id="InputDriver" onkeyup="myFunction('#InputDriver', 'DriverList')" class="form-control" placeholder="Введите водителя...">
+                        <ul id="DriverList">
+                            @foreach (var item in Model.Driver)
+                            {
+                                <li class="dropdown-item" onclick="AutoInput('@item.ID','DriverInp','@Html.DisplayFor(modelitem => item.FullName)')">
+                                    @item.FullName
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <p class="DriverInp"></p>
                 <span asp-validation-for="CarsStolen.DriverID" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -38,19 +72,27 @@
                 <textarea asp-for="CarsStolen.Circumstances" class="form-control" ></textarea>
                 <span asp-validation-for="CarsStolen.Circumstances" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CarsStolen.MarkFind" /> @Html.DisplayNameFor(model => model.CarsStolen.MarkFind)
-                </label>
-            </div>
             <div class="form-group">
-                <label asp-for="CarsStolen.DateFind" class="control-label"></label>
-                <input asp-for="CarsStolen.DateFind" class="form-control" />
-                <span asp-validation-for="CarsStolen.DateFind" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CarsStolen.StaffID" class="control-label"></label>
-                <input asp-for="CarsStolen.StaffID" class="form-control" />
+                <label asp-for="CarsStolen.Staff" class="control-label"></label>
+                <input asp-for="CarsStolen.StaffID" hidden class="form-control StaffInp" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                <br />
+                <div class="btn-group dropright">
+                    <button class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Выбрать
+                    </button>
+                    <div class="dropdown-menu">
+                        <input type="text" id="myInput" onkeyup="myFunction('#myInput', 'myUL')" class="form-control" placeholder="Введите сотрудника...">
+                        <ul id="myUL">
+                            @foreach (var item in Model.Staff)
+                            {
+                                <li class="dropdown-item" onclick="AutoInput('@item.ID','StaffInp','@item.FullName')">
+                                    @item.FullName
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <p class="StaffInp"></p>
                 <span asp-validation-for="CarsStolen.StaffID" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -63,7 +105,28 @@
 <div>
     <a asp-page="Index">Вернуться к списку</a>
 </div>
+<script>
+    function myFunction(obj, list) {
+        var filter, ul, li, a, i;
+        filter = $(obj).prop("value").toUpperCase();
+        ul = document.getElementById(list);
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
 
+            }
+        }
+    }
+    function AutoInput(val, cl, lol) {
+        var classj = "." + cl;
+        $("input" + classj).val(val);
+        $("p" + classj).html("выбран - " + lol);
+    }
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
